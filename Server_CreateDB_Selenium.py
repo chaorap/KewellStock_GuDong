@@ -11,7 +11,7 @@ from selenium.webdriver.common.keys import Keys
 def ReadStockGuDongNumber(Stock_Number):
 	try:
 		#weburl = "http://www.yidiancangwei.com/gudong/renshu_awdwad.html"
-		weburl = "http://www.yidiancangwei.com/gudong/renshu_" + str(Stock_Number) + ".html"
+		weburl = "http://www.yidiancangwei.com/gudong/renshu_" + Stock_Number + ".html"
 		#webheader = {'User-Agent':'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:23.0) Gecko/20100101 Firefox/23.0'} 
 		#req = urllib.request.Request(url=weburl, headers=webheader)  
 		#webPage=urllib.request.urlopen(req)
@@ -25,7 +25,7 @@ def ReadStockGuDongNumber(Stock_Number):
 
 		soup = BeautifulSoup(HtmlData,'lxml')
 
-		print(str(Stock_Number) + ':')
+		print(Stock_Number + ':')
 		for idx, tr in enumerate(soup.find_all('tr')):
 			if idx == 1:
 				tds = tr.find_all('td')
@@ -36,7 +36,7 @@ def ReadStockGuDongNumber(Stock_Number):
 					GD_Change="0"
 				SessionName=",SDate" + str(idx) + ",SNumber" + str(idx) + ",SPercent" + str(idx) + ") values("
 				sql="insert into Gudong(" + "StockNumber" + SessionName
-				sql=sql+ str(Stock_Number) + ", '" + GD_Date +"',"+GD_Number+","+GD_Change.rstrip("%")+")"
+				sql=sql+ Stock_Number + ", '" + GD_Date +"',"+GD_Number+","+GD_Change.rstrip("%")+")"
 				print(sql)
 				cu.execute(sql)
 				#print('   ' + GD_Date + '   ' + GD_Number + '   ' + GD_Change)
@@ -51,7 +51,7 @@ def ReadStockGuDongNumber(Stock_Number):
 				sql="update Gudong set " + "SDate" + str(idx) + "='" + GD_Date
 				sql=sql+"', SNumber" + str(idx) + "=" + GD_Number
 				sql=sql+", SPercent" + str(idx) + "=" + GD_Change.rstrip("%")
-				sql=sql+ " where StockNumber = " + str(Stock_Number)
+				sql=sql+ " where StockNumber = " + Stock_Number
 				print(sql)
 				cu.execute(sql)
 			cx.commit()
@@ -82,20 +82,25 @@ cu.execute("create table Gudong (StockNumber integer primary key, SDate1 date, S
 
 BaseStock = 600000
 for i in range(0,999):
-	ReadStockGuDongNumber(BaseStock + i)
+	ReadStockGuDongNumber(str(BaseStock + i))
 
 BaseStock = 601000
 for i in range(0,999):
-	ReadStockGuDongNumber(BaseStock + i)
+	ReadStockGuDongNumber(str(BaseStock + i))
 	
-BaseStock = 100000
+BaseStock = 0
 for i in range(0,999):
-	ReadStockGuDongNumber(BaseStock + i)
+	ReadStockGuDongNumber("000%03d"%(BaseStock + i))
 	
-BaseStock = 102000
+BaseStock = 2000
 for i in range(0,999):
-	ReadStockGuDongNumber(BaseStock + i)
+	ReadStockGuDongNumber("00%04d"%(BaseStock + i))
 	
 BaseStock = 300000
 for i in range(0,999):
-	ReadStockGuDongNumber(BaseStock + i)
+	ReadStockGuDongNumber(str(BaseStock + i))
+	
+	
+	
+	
+	
