@@ -17,7 +17,7 @@ def ReadStockGuDongNumber(Stock_Number):
 		#webPage=urllib.request.urlopen(req)
 		
 		browser.get(weburl)
-		time.sleep(2)
+		time.sleep(1)
 		HtmlData = browser.page_source
 
 		#HtmlData = webPage.read()
@@ -62,11 +62,11 @@ def ReadStockGuDongNumber(Stock_Number):
 	#except:
 	#	print("Error: Other error");
 		
-chromedriver = "C:\Program Files (x86)\Google\Chrome\Application\chromedriver.exe"
+chromedriver = "K:\KewellStock_GuDong\chromedriver.exe"
 os.environ["webdriver.chrome.driver"] = chromedriver
 browser = webdriver.Chrome(chromedriver)
 
-DB_Name = "D:\cyc\GSFI\KewellStock_GuDong\db\AStock_" +  datetime.datetime.now().strftime('%Y-%m-%d_%H_%M_%S') + ".sqlite"
+DB_Name = "K:\KewellStock_GuDong\db\AStock_" +  datetime.datetime.now().strftime('%Y-%m-%d_%H_%M_%S') + ".sqlite"
 cx = sqlite3.connect(DB_Name)
 cu=cx.cursor()
 cu.execute("create table Gudong (StockNumber integer primary key, SDate1 date, SNumber1 integer, SPercent1 float,\
@@ -80,12 +80,22 @@ cu.execute("create table Gudong (StockNumber integer primary key, SDate1 date, S
 																  SDate9 date, SNumber9 integer, SPercent9 float,\
 																  SDate10 date, SNumber10 integer, SPercent10 float)")
 
-BaseStock = 300000
-for i in range(0,3):
+BaseStock = 600000
+for i in range(0,999):
 	ReadStockGuDongNumber(BaseStock + i)
-	time.sleep(1)
+
+BaseStock = 601000
+for i in range(0,999):
+	ReadStockGuDongNumber(BaseStock + i)
 	
-# BaseStock = 000000
-# for i in range(0,2000):
-	# ReadStockGuDongNumber(BaseStock + i)
-	# time.sleep(1)
+BaseStock = 100000
+for i in range(0,999):
+	ReadStockGuDongNumber(BaseStock + i)
+	
+BaseStock = 102000
+for i in range(0,999):
+	ReadStockGuDongNumber(BaseStock + i)
+	
+BaseStock = 300000
+for i in range(0,999):
+	ReadStockGuDongNumber(BaseStock + i)
