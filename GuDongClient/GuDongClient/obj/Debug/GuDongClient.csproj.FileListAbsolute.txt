@@ -1,0 +1,12 @@
+D:\cyc\GSFI\KewellStock_GuDong\GuDongClient\GuDongClient\bin\Debug\GuDongClient.exe.config
+D:\cyc\GSFI\KewellStock_GuDong\GuDongClient\GuDongClient\bin\Debug\GuDongClient.exe
+D:\cyc\GSFI\KewellStock_GuDong\GuDongClient\GuDongClient\bin\Debug\GuDongClient.pdb
+D:\cyc\GSFI\KewellStock_GuDong\GuDongClient\GuDongClient\obj\Debug\GuDongClient.Properties.Resources.resources
+D:\cyc\GSFI\KewellStock_GuDong\GuDongClient\GuDongClient\obj\Debug\GuDongClient.csproj.GenerateResource.Cache
+D:\cyc\GSFI\KewellStock_GuDong\GuDongClient\GuDongClient\obj\Debug\GuDongClient.exe
+D:\cyc\GSFI\KewellStock_GuDong\GuDongClient\GuDongClient\obj\Debug\GuDongClient.pdb
+D:\cyc\GSFI\KewellStock_GuDong\GuDongClient\GuDongClient\obj\Debug\GuDongClient.GuDongClient.resources
+D:\cyc\GSFI\KewellStock_GuDong\GuDongClient\GuDongClient\obj\Debug\GuDongClient.csprojResolveAssemblyReference.cache
+D:\cyc\GSFI\KewellStock_GuDong\GuDongClient\GuDongClient\bin\Debug\System.Data.SQLite.dll
+D:\cyc\GSFI\KewellStock_GuDong\GuDongClient\GuDongClient\bin\Debug\x64\SQLite.Interop.dll
+D:\cyc\GSFI\KewellStock_GuDong\GuDongClient\GuDongClient\bin\Debug\x86\SQLite.Interop.dll
