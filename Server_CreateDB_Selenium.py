@@ -12,17 +12,18 @@ def ReadStockGuDongNumber(Stock_Number):
 	try:
 		#weburl = "http://www.yidiancangwei.com/gudong/renshu_awdwad.html"
 		weburl = "http://www.yidiancangwei.com/gudong/renshu_" + Stock_Number + ".html"
-		#webheader = {'User-Agent':'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:23.0) Gecko/20100101 Firefox/23.0'} 
-		#req = urllib.request.Request(url=weburl, headers=webheader)  
-		#webPage=urllib.request.urlopen(req)
 		
-		browser.get(weburl)
-		time.sleep(1)
-		HtmlData = browser.page_source
-
-		#HtmlData = webPage.read()
-		#HtmlData = HtmlData.decode('UTF-8')
-
+		if UseSelenium == 1:
+			browser.get(weburl)
+			time.sleep(1)
+			HtmlData = browser.page_source.encode('UTF-8').decode('UTF-8')
+		elif UseSelenium == 0:
+			webheader = {'User-Agent':'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:23.0) Gecko/20100101 Firefox/23.0'} 
+			req = urllib.request.Request(url=weburl, headers=webheader)  
+			webPage=urllib.request.urlopen(req)
+			HtmlData = webPage.read()
+			HtmlData = HtmlData.decode('UTF-8')
+			
 		soup = BeautifulSoup(HtmlData,'lxml')
 
 		print(Stock_Number + ':')
@@ -61,10 +62,13 @@ def ReadStockGuDongNumber(Stock_Number):
 		print("Error: Cannot connect to server")
 	#except:
 	#	print("Error: Other error");
-		
-chromedriver = "K:\KewellStock_GuDong\chromedriver.exe"
-os.environ["webdriver.chrome.driver"] = chromedriver
-browser = webdriver.Chrome(chromedriver)
+	
+UseSelenium = 0
+
+if UseSelenium == 1:
+	chromedriver = "K:\KewellStock_GuDong\chromedriver.exe"
+	os.environ["webdriver.chrome.driver"] = chromedriver
+	browser = webdriver.Chrome(chromedriver)
 
 DB_Name = "K:\KewellStock_GuDong\db\AStock_" +  datetime.datetime.now().strftime('%Y-%m-%d_%H_%M_%S') + ".sqlite"
 cx = sqlite3.connect(DB_Name)
