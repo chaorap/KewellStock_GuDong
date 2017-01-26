@@ -26,9 +26,15 @@ namespace GuDongClient
         private void ClearStock()
         {
             lv_Result.Clear();
-            lv_Result.Columns.Add("代码", 60, HorizontalAlignment.Left);
-            lv_Result.Columns.Add("最后更新日期", 140, HorizontalAlignment.Left);
-            lv_Result.Columns.Add("减少比例%", 650, HorizontalAlignment.Left);
+            lv_Result.Columns.Add("代码", 80, HorizontalAlignment.Left);
+            lv_Result.Columns.Add("名称", 100, HorizontalAlignment.Left);
+            lv_Result.Columns.Add("最后更新日期", 200, HorizontalAlignment.Left);
+            lv_Result.Columns.Add("总减少比例%", 200, HorizontalAlignment.Left);
+            lv_Result.Columns.Add("总股本", 150, HorizontalAlignment.Left);
+            lv_Result.Columns.Add("流通股", 150, HorizontalAlignment.Left);
+            lv_Result.Columns.Add("公积金", 150, HorizontalAlignment.Left);
+            lv_Result.Columns.Add("未分配", 150, HorizontalAlignment.Left);
+            lv_Result.Columns.Add("每股收益", 150, HorizontalAlignment.Left);
         }
 
         private void Bttn_ChooseDB_Click(object sender, EventArgs e)
@@ -80,11 +86,20 @@ namespace GuDongClient
                 {
                     DataTable dt = new DataTable();
                     int period = (int)nud_Period.Value;
-                    string sql = "";
-                    switch(period)
+                    float per;
+                    string sql = "select * from Gudong where SPercent1<0 ";
+
+                    if (period == 1)
                     {
-                        case 1: sql = "select * from Gudong where SPercent1<0 order by SPercent1 DESC"; break;
-                        case 2: sql = "select * from Gudong where SPercent1<0 and SPercent2<0 order by SPercent1+SPercent2 DESC"; break;
+                        sql = "select * from Gudong where SPercent1<0 order by SPercent1 DESC";
+                    }
+                    else
+                    {
+                        for (int i = 2; i <= period; i++)
+                        {
+                            sql = sql + string.Format("and SPercent{0:d}<0 ", i);
+                        }
+                        sql = sql + string.Format("order by (SNumber1-SNumber{0:d})/SNumber{0:d} DESC", period);
                     }
 
                     using (SQLiteCommand command = new SQLiteCommand(conn))
@@ -98,14 +113,45 @@ namespace GuDongClient
 
                         for (int i = 0; i < dt.Rows.Count; i++)
                         {
-                            //dt.Rows[0][Column]
-                            int lineNo = lv_Result.Items.Count;
-                            lv_Result.Items.Insert(0, new ListViewItem(new string[] { dt.Rows[i][0].ToString(), dt.Rows[i][1].ToString(), dt.Rows[i][3].ToString() + "%" }));
+                            DateTime datet;
+                            DateTime.TryParse(dt.Rows[i][7].ToString(), out datet);
+                            if (period == 1)
+                            {
+                                per = float.Parse(dt.Rows[i][9].ToString());
+                            }
+                            else
+                            {
+                                //per = (float.Parse(dt.Rows[i][12 + (period - 2) * 3].ToString()) - float.Parse(dt.Rows[i][9].ToString()))/float.Parse(dt.Rows[i][9].ToString();
+                                //per = (float.Parse(dt.Rows[i][8].ToString()) - float.Parse(dt.Rows[i][11 + (period - 2) * 3].ToString()))/float.Parse(dt.Rows[i][11 + (period - 2) * 3].ToString());
+                                float n1 = float.Parse(dt.Rows[i][8].ToString());
+                                float nn = float.Parse(dt.Rows[i][11 + (period - 2) * 3].ToString());
+                                per = (n1 - nn) * 100 / nn;
+                            }
+                            float zgb = float.Parse(dt.Rows[i][2].ToString());
+                            float ltg = float.Parse(dt.Rows[i][3].ToString());
+                            string string_zgb, string_ltg;
+                            if(zgb<10000)
+                            {
+                                string_zgb = (zgb ).ToString() + "千万";
+                            }
+                            else
+                            {
+                                string_zgb = (zgb/10000).ToString() + "亿";
+                            }
+                            if (ltg < 10000)
+                            {
+                                string_ltg = (ltg ).ToString() + "千万";
+                            }
+                            else
+                            {
+                                string_ltg = (ltg/10000).ToString() + "亿";
+                            }
+                            lv_Result.Items.Insert(0, new ListViewItem(new string[] { dt.Rows[i][0].ToString().PadLeft(6, '0'), dt.Rows[i][1].ToString(), dt.Rows[i][7].ToString(), per.ToString() + "%", string_zgb, string_ltg }));
                             lv_Result.EnsureVisible(0);
                         }
                     }
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
                     MessageBox.Show(ex.Message.ToString());
                 }
