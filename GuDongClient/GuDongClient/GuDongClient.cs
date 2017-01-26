@@ -94,7 +94,7 @@ namespace GuDongClient
                 {
                     DataTable dt = new DataTable();
                     int period = (int)nud_Period.Value;
-                    float per;
+                    float per = 1.0f;
                     string sql = "select * from Gudong where SPercent1<0 ";
 
                     if (period == 1)
@@ -107,7 +107,12 @@ namespace GuDongClient
                         {
                             sql = sql + string.Format("and SPercent{0:d}<0 ", i);
                         }
-                        sql = sql + string.Format("order by (SNumber1-SNumber{0:d})/SNumber{0:d} DESC", period);
+                        sql = sql + string.Format("order by 1 - ((1+SPercent1/100)");
+                        for (int i = 2; i <= period; i++)
+                        {
+                            sql = sql + string.Format("*(1+SPercent{0:d}/100)", i);
+                        }
+                        sql = sql + ")";
                     }
 
                     using (SQLiteCommand command = new SQLiteCommand(conn))
@@ -131,9 +136,16 @@ namespace GuDongClient
                             {
                                 //per = (float.Parse(dt.Rows[i][12 + (period - 2) * 3].ToString()) - float.Parse(dt.Rows[i][9].ToString()))/float.Parse(dt.Rows[i][9].ToString();
                                 //per = (float.Parse(dt.Rows[i][8].ToString()) - float.Parse(dt.Rows[i][11 + (period - 2) * 3].ToString()))/float.Parse(dt.Rows[i][11 + (period - 2) * 3].ToString());
-                                float n1 = float.Parse(dt.Rows[i][8].ToString());
-                                float nn = float.Parse(dt.Rows[i][11 + (period - 2) * 3].ToString());
-                                per = (n1 - nn) * 100 / nn;
+                                //float n1 = float.Parse(dt.Rows[i][9].ToString());
+                                //float nn = float.Parse(dt.Rows[i][12 + (period - 2) * 3].ToString());
+
+                                //per = (100 + n1) * (100 + nn);
+                                per = 1.0f + float.Parse(dt.Rows[i][9].ToString())/100;
+                                for (int j=2; j<=period;j++)
+                                {
+                                    per *= (1.0f + float.Parse(dt.Rows[i][12 + (j - 2) * 3].ToString()) / 100);
+                                }
+                                per = (1.0f - per)*100;
                             }
                             float zgb = float.Parse(dt.Rows[i][2].ToString());
                             float ltg = float.Parse(dt.Rows[i][3].ToString());
@@ -163,6 +175,7 @@ namespace GuDongClient
                 {
                     MessageBox.Show(ex.Message.ToString());
                 }
+                ClearStockInfo();
             }
         }
 

@@ -21,4 +21,3 @@ K:\KewellStock_GuDong\GuDongClient\GuDongClient\bin\Debug\System.Data.SQLite.dll
 K:\KewellStock_GuDong\GuDongClient\GuDongClient\obj\Debug\GuDongClient.GuDongClient.resources
 K:\KewellStock_GuDong\GuDongClient\GuDongClient\obj\Debug\GuDongClient.Properties.Resources.resources
 K:\KewellStock_GuDong\GuDongClient\GuDongClient\obj\Debug\GuDongClient.csproj.GenerateResource.Cache
-K:\KewellStock_GuDong\GuDongClient\GuDongClient\obj\Debug\GuDongClient.csprojResolveAssemblyReference.cache
