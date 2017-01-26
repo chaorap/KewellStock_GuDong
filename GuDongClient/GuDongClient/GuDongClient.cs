@@ -19,22 +19,30 @@ namespace GuDongClient
         public GuDongClient()
         {
             InitializeComponent();
-            this.Font = new Font(Font.Name, 15);
+            this.Font = new Font(Font.Name, 12);
             ClearStock();
         }
 
         private void ClearStock()
         {
             lv_Result.Clear();
-            lv_Result.Columns.Add("代码", 80, HorizontalAlignment.Left);
-            lv_Result.Columns.Add("名称", 100, HorizontalAlignment.Left);
-            lv_Result.Columns.Add("最后更新日期", 200, HorizontalAlignment.Left);
-            lv_Result.Columns.Add("总减少比例%", 200, HorizontalAlignment.Left);
-            lv_Result.Columns.Add("总股本", 150, HorizontalAlignment.Left);
-            lv_Result.Columns.Add("流通股", 150, HorizontalAlignment.Left);
-            lv_Result.Columns.Add("公积金", 150, HorizontalAlignment.Left);
-            lv_Result.Columns.Add("未分配", 150, HorizontalAlignment.Left);
-            lv_Result.Columns.Add("每股收益", 150, HorizontalAlignment.Left);
+            lv_Result.Columns.Add("代码", 60, HorizontalAlignment.Left);
+            lv_Result.Columns.Add("名称", 80, HorizontalAlignment.Left);
+            lv_Result.Columns.Add("最后更新日期", 140, HorizontalAlignment.Left);
+            lv_Result.Columns.Add("总减少比例%", 120, HorizontalAlignment.Left);
+            lv_Result.Columns.Add("总股本", 90, HorizontalAlignment.Left);
+            lv_Result.Columns.Add("流通股", 70, HorizontalAlignment.Left);
+            lv_Result.Columns.Add("公积金", 70, HorizontalAlignment.Left);
+            lv_Result.Columns.Add("未分配", 70, HorizontalAlignment.Left);
+            lv_Result.Columns.Add("每股收益", 90, HorizontalAlignment.Left);
+        }
+
+        private void ClearStockInfo()
+        {
+            lv_StockInfo.Clear();
+            lv_StockInfo.Columns.Add("日期", 150, HorizontalAlignment.Center);
+            lv_StockInfo.Columns.Add("股东人数", 150, HorizontalAlignment.Center);
+            lv_StockInfo.Columns.Add("减少比例%", 150, HorizontalAlignment.Center);
         }
 
         private void Bttn_ChooseDB_Click(object sender, EventArgs e)
@@ -130,23 +138,23 @@ namespace GuDongClient
                             float zgb = float.Parse(dt.Rows[i][2].ToString());
                             float ltg = float.Parse(dt.Rows[i][3].ToString());
                             string string_zgb, string_ltg;
-                            if(zgb<10000)
+                            if((zgb<1.0f) && (zgb>0))
                             {
-                                string_zgb = (zgb ).ToString() + "千万";
+                                string_zgb = (zgb*10000 ).ToString() + "万";
                             }
                             else
                             {
-                                string_zgb = (zgb/10000).ToString() + "亿";
+                                string_zgb = (zgb).ToString() + "亿";
                             }
-                            if (ltg < 10000)
+                            if ((ltg < 1.0f) && (zgb > 0))
                             {
-                                string_ltg = (ltg ).ToString() + "千万";
+                                string_ltg = (ltg*10000 ).ToString() + "万";
                             }
                             else
                             {
-                                string_ltg = (ltg/10000).ToString() + "亿";
+                                string_ltg = (ltg).ToString() + "亿";
                             }
-                            lv_Result.Items.Insert(0, new ListViewItem(new string[] { dt.Rows[i][0].ToString().PadLeft(6, '0'), dt.Rows[i][1].ToString(), dt.Rows[i][7].ToString(), per.ToString() + "%", string_zgb, string_ltg }));
+                            lv_Result.Items.Insert(0, new ListViewItem(new string[] { dt.Rows[i][0].ToString().PadLeft(6, '0'), dt.Rows[i][1].ToString(),DateTime.Parse(dt.Rows[i][7].ToString()).ToString("yyyy年MM月dd日"), per.ToString() + "%", string_zgb, string_ltg, dt.Rows[i][4].ToString(), dt.Rows[i][6].ToString(), dt.Rows[i][5].ToString() }));
                             lv_Result.EnsureVisible(0);
                         }
                     }
@@ -161,6 +169,67 @@ namespace GuDongClient
         private void nud_Period_ValueChanged(object sender, EventArgs e)
         {
             UpdateStockTable();
+        }
+
+        private void lv_Result_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            //if(lv_Result.SelectedItems[0] != null)
+            if (lv_Result.SelectedIndices == null || lv_Result.SelectedIndices.Count == 0)
+            {
+                ClearStockInfo();
+            }
+            else
+            {
+                try
+                {
+                    if(conn != null)
+                    {
+                        DataTable dt = new DataTable();
+
+                        lb_StockName.Text =  lv_Result.SelectedItems[0].SubItems[1].Text + "(" + lv_Result.SelectedItems[0].SubItems[0].Text + ") 股东信息";
+                        string sql = "select * from Gudong where StockNumber = " + lv_Result.SelectedItems[0].SubItems[0].Text;
+                        using (SQLiteCommand command = new SQLiteCommand(conn))
+                        {
+                            SQLiteDataAdapter adapter = new SQLiteDataAdapter(command);
+                            command.CommandText = sql;
+                            command.ExecuteNonQuery();
+
+                            adapter.Fill(dt);
+                            ClearStockInfo();
+
+                            for(int i=1;i<=20; i++)
+                            {
+                                string DateX = "SDate" + string.Format("{0:d}",i);
+                                string NumX = "SNumber" + string.Format("{0:d}", i);
+                                string PerX = "SPercent" + string.Format("{0:d}", i);
+                                if (dt.Rows[0][NumX].ToString() == null || dt.Rows[0][NumX].ToString() == "")
+                                {
+                                    break;
+                                }
+                                else
+                                {
+                                    //MessageBox.Show(DateTime.Parse(dt.Rows[0][DateX].ToString()).ToString("yyyy年MM月dd日") + "\n" + dt.Rows[0][NumX].ToString() + "\n"+ dt.Rows[0][PerX].ToString());
+                                    ListViewItem item = new ListViewItem(new string[] { DateTime.Parse(dt.Rows[0][DateX].ToString()).ToString("yyyy年MM月dd日"), dt.Rows[0][NumX].ToString(), dt.Rows[0][PerX].ToString() + "%" });
+                                    if(float.Parse(dt.Rows[0][PerX].ToString()) >= 0)
+                                    {
+                                        item.ForeColor = Color.Red;
+                                    }
+                                    else
+                                    {
+                                        item.ForeColor = Color.Green;
+                                    }
+                                    lv_StockInfo.Items.Insert(lv_StockInfo.Items.Count, item);
+                                }
+                            }
+                            lv_StockInfo.EnsureVisible(0);
+                        }
+                    }
+                }
+                catch(Exception ex)
+                {
+                    MessageBox.Show(ex.Message.ToString());
+                }
+            }
         }
     }
 }
