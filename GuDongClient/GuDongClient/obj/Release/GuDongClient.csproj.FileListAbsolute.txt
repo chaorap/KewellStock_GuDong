@@ -10,3 +10,15 @@ D:\cyc\GSFI\KewellStock_GuDong\GuDongClient\GuDongClient\obj\Release\GuDongClien
 D:\cyc\GSFI\KewellStock_GuDong\GuDongClient\GuDongClient\bin\Release\x64\SQLite.Interop.dll
 D:\cyc\GSFI\KewellStock_GuDong\GuDongClient\GuDongClient\bin\Release\x86\SQLite.Interop.dll
 D:\cyc\GSFI\KewellStock_GuDong\GuDongClient\GuDongClient\obj\Release\GuDongClient.csprojResolveAssemblyReference.cache
+K:\KewellStock_GuDong\GuDongClient\GuDongClient\bin\Release\GuDongClient.exe.config
+K:\KewellStock_GuDong\GuDongClient\GuDongClient\obj\Release\GuDongClient.exe
+K:\KewellStock_GuDong\GuDongClient\GuDongClient\obj\Release\GuDongClient.pdb
+K:\KewellStock_GuDong\GuDongClient\GuDongClient\bin\Release\x64\SQLite.Interop.dll
+K:\KewellStock_GuDong\GuDongClient\GuDongClient\bin\Release\x86\SQLite.Interop.dll
+K:\KewellStock_GuDong\GuDongClient\GuDongClient\bin\Release\GuDongClient.exe
+K:\KewellStock_GuDong\GuDongClient\GuDongClient\bin\Release\GuDongClient.pdb
+K:\KewellStock_GuDong\GuDongClient\GuDongClient\bin\Release\System.Data.SQLite.dll
+K:\KewellStock_GuDong\GuDongClient\GuDongClient\obj\Release\GuDongClient.csprojResolveAssemblyReference.cache
+K:\KewellStock_GuDong\GuDongClient\GuDongClient\obj\Release\GuDongClient.GuDongClient.resources
+K:\KewellStock_GuDong\GuDongClient\GuDongClient\obj\Release\GuDongClient.Properties.Resources.resources
+K:\KewellStock_GuDong\GuDongClient\GuDongClient\obj\Release\GuDongClient.csproj.GenerateResource.Cache
