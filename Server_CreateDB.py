@@ -75,11 +75,11 @@ DB_Name = "K:\KewellStock_GuDong\db\AStock_" +  datetime.datetime.now().strftime
 cx = sqlite3.connect(DB_Name)
 cu=cx.cursor()
 cu.execute("create table Gudong (StockNumber integer primary key, Name nvarchar(10),\
-																  totals integer,\
-																  outstanding integer,\
-																  reservedPerShare integer,\
-																  esp integer,\
-																  perundp integer,\
+																  totals float,\
+																  outstanding float,\
+																  reservedPerShare float,\
+																  esp float,\
+																  perundp float,\
 																  SDate1 date, SNumber1 integer, SPercent1 float,\
 																  SDate2 date, SNumber2 integer, SPercent2 float,\
 																  SDate3 date, SNumber3 integer, SPercent3 float,\
