@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SQLite;
+using System.Net;
 
 namespace GuDongClient
 {
@@ -145,7 +146,7 @@ namespace GuDongClient
                                 {
                                     per *= (1.0f + float.Parse(dt.Rows[i][12 + (j - 2) * 3].ToString()) / 100);
                                 }
-                                per = (1.0f - per)*100;
+                                per = (1.0f - per)*(-100);
                             }
                             float zgb = float.Parse(dt.Rows[i][2].ToString());
                             float ltg = float.Parse(dt.Rows[i][3].ToString());
@@ -235,6 +236,22 @@ namespace GuDongClient
                                 }
                             }
                             lv_StockInfo.EnsureVisible(0);
+                            if (true)
+                            {
+                                string code = dt.Rows[0][0].ToString().PadLeft(6, '0');
+                                string url = "http://image.sinajs.cn/newchart/daily/n/";
+                                if (code.Substring(0, 1) == "6")
+                                {
+                                    url += "sh";
+                                }
+                                else
+                                {
+                                    url += "sz";
+                                }
+                                url += code + ".gif";
+
+                                Pic_Stock.ImageLocation = url;
+                            }
                         }
                     }
                 }

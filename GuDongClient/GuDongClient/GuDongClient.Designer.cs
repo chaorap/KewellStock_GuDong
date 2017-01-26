@@ -37,13 +37,15 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.lv_StockInfo = new System.Windows.Forms.ListView();
+            this.Pic_Stock = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.nud_Period)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Pic_Stock)).BeginInit();
             this.SuspendLayout();
             // 
             // lv_Result
             // 
             this.lv_Result.FullRowSelect = true;
-            this.lv_Result.Location = new System.Drawing.Point(16, 86);
+            this.lv_Result.Location = new System.Drawing.Point(14, 63);
             this.lv_Result.Name = "lv_Result";
             this.lv_Result.Size = new System.Drawing.Size(624, 516);
             this.lv_Result.TabIndex = 4;
@@ -53,7 +55,7 @@
             // 
             // nud_Period
             // 
-            this.nud_Period.Location = new System.Drawing.Point(89, 37);
+            this.nud_Period.Location = new System.Drawing.Point(86, 36);
             this.nud_Period.Maximum = new decimal(new int[] {
             20,
             0,
@@ -104,7 +106,7 @@
             // lb_StockName
             // 
             this.lb_StockName.AutoSize = true;
-            this.lb_StockName.Location = new System.Drawing.Point(645, 71);
+            this.lb_StockName.Location = new System.Drawing.Point(645, 45);
             this.lb_StockName.Name = "lb_StockName";
             this.lb_StockName.Size = new System.Drawing.Size(0, 12);
             this.lb_StockName.TabIndex = 6;
@@ -112,7 +114,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(16, 39);
+            this.label3.Location = new System.Drawing.Point(12, 39);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(71, 12);
             this.label3.TabIndex = 7;
@@ -129,18 +131,28 @@
             // 
             // lv_StockInfo
             // 
-            this.lv_StockInfo.Location = new System.Drawing.Point(647, 86);
+            this.lv_StockInfo.Location = new System.Drawing.Point(644, 63);
             this.lv_StockInfo.Name = "lv_StockInfo";
-            this.lv_StockInfo.Size = new System.Drawing.Size(400, 516);
+            this.lv_StockInfo.Size = new System.Drawing.Size(400, 328);
             this.lv_StockInfo.TabIndex = 9;
             this.lv_StockInfo.UseCompatibleStateImageBehavior = false;
             this.lv_StockInfo.View = System.Windows.Forms.View.Details;
+            // 
+            // Pic_Stock
+            // 
+            this.Pic_Stock.Location = new System.Drawing.Point(644, 398);
+            this.Pic_Stock.Name = "Pic_Stock";
+            this.Pic_Stock.Size = new System.Drawing.Size(400, 181);
+            this.Pic_Stock.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+            this.Pic_Stock.TabIndex = 10;
+            this.Pic_Stock.TabStop = false;
             // 
             // GuDongClient
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1063, 614);
+            this.ClientSize = new System.Drawing.Size(1056, 593);
+            this.Controls.Add(this.Pic_Stock);
             this.Controls.Add(this.lv_StockInfo);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
@@ -153,6 +165,7 @@
             this.Name = "GuDongClient";
             this.Text = "股东人数";
             ((System.ComponentModel.ISupportInitialize)(this.nud_Period)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Pic_Stock)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -169,6 +182,7 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.ListView lv_StockInfo;
+        private System.Windows.Forms.PictureBox Pic_Stock;
     }
 }
 
