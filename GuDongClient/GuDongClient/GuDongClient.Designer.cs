@@ -38,6 +38,11 @@
             this.label4 = new System.Windows.Forms.Label();
             this.lv_StockInfo = new System.Windows.Forms.ListView();
             this.Pic_Stock = new System.Windows.Forms.PictureBox();
+            this.dtp_StockDate = new System.Windows.Forms.DateTimePicker();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.tb_LocateStock = new System.Windows.Forms.TextBox();
+            this.Bttn_LocateStock = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.nud_Period)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Pic_Stock)).BeginInit();
             this.SuspendLayout();
@@ -61,11 +66,6 @@
             0,
             0,
             0});
-            this.nud_Period.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
             this.nud_Period.Name = "nud_Period";
             this.nud_Period.Size = new System.Drawing.Size(46, 21);
             this.nud_Period.TabIndex = 3;
@@ -78,9 +78,9 @@
             // 
             // Bttn_ChooseDB
             // 
-            this.Bttn_ChooseDB.Location = new System.Drawing.Point(542, 8);
+            this.Bttn_ChooseDB.Location = new System.Drawing.Point(558, 8);
             this.Bttn_ChooseDB.Name = "Bttn_ChooseDB";
-            this.Bttn_ChooseDB.Size = new System.Drawing.Size(98, 21);
+            this.Bttn_ChooseDB.Size = new System.Drawing.Size(80, 21);
             this.Bttn_ChooseDB.TabIndex = 2;
             this.Bttn_ChooseDB.Text = "选择文件";
             this.Bttn_ChooseDB.UseVisualStyleBackColor = true;
@@ -91,7 +91,7 @@
             this.tb_SelectedDB.Location = new System.Drawing.Point(86, 9);
             this.tb_SelectedDB.Name = "tb_SelectedDB";
             this.tb_SelectedDB.ReadOnly = true;
-            this.tb_SelectedDB.Size = new System.Drawing.Size(450, 21);
+            this.tb_SelectedDB.Size = new System.Drawing.Size(466, 21);
             this.tb_SelectedDB.TabIndex = 1;
             // 
             // label1
@@ -147,11 +147,60 @@
             this.Pic_Stock.TabIndex = 10;
             this.Pic_Stock.TabStop = false;
             // 
+            // dtp_StockDate
+            // 
+            this.dtp_StockDate.Location = new System.Drawing.Point(292, 36);
+            this.dtp_StockDate.Name = "dtp_StockDate";
+            this.dtp_StockDate.Size = new System.Drawing.Size(121, 21);
+            this.dtp_StockDate.TabIndex = 11;
+            this.dtp_StockDate.ValueChanged += new System.EventHandler(this.dtp_StockDate_ValueChanged);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(173, 39);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(113, 12);
+            this.label2.TabIndex = 12;
+            this.label2.Text = "最后一期更新日期在";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(419, 39);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(29, 12);
+            this.label5.TabIndex = 13;
+            this.label5.Text = "之后";
+            // 
+            // tb_LocateStock
+            // 
+            this.tb_LocateStock.Location = new System.Drawing.Point(455, 36);
+            this.tb_LocateStock.Name = "tb_LocateStock";
+            this.tb_LocateStock.Size = new System.Drawing.Size(97, 21);
+            this.tb_LocateStock.TabIndex = 14;
+            this.tb_LocateStock.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tb_LocateStock_KeyDown);
+            // 
+            // Bttn_LocateStock
+            // 
+            this.Bttn_LocateStock.Location = new System.Drawing.Point(558, 36);
+            this.Bttn_LocateStock.Name = "Bttn_LocateStock";
+            this.Bttn_LocateStock.Size = new System.Drawing.Size(80, 21);
+            this.Bttn_LocateStock.TabIndex = 15;
+            this.Bttn_LocateStock.Text = "定位股票";
+            this.Bttn_LocateStock.UseVisualStyleBackColor = true;
+            this.Bttn_LocateStock.Click += new System.EventHandler(this.Bttn_LocateStock_Click);
+            // 
             // GuDongClient
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1056, 593);
+            this.Controls.Add(this.Bttn_LocateStock);
+            this.Controls.Add(this.tb_LocateStock);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.dtp_StockDate);
             this.Controls.Add(this.Pic_Stock);
             this.Controls.Add(this.lv_StockInfo);
             this.Controls.Add(this.label4);
@@ -183,6 +232,11 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.ListView lv_StockInfo;
         private System.Windows.Forms.PictureBox Pic_Stock;
+        private System.Windows.Forms.DateTimePicker dtp_StockDate;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.TextBox tb_LocateStock;
+        private System.Windows.Forms.Button Bttn_LocateStock;
     }
 }
 

@@ -32,7 +32,7 @@ namespace GuDongClient
             lv_Result.Columns.Add("最后更新日期", 140, HorizontalAlignment.Left);
             lv_Result.Columns.Add("总减少比例%", 120, HorizontalAlignment.Left);
             lv_Result.Columns.Add("总股本", 90, HorizontalAlignment.Left);
-            lv_Result.Columns.Add("流通股", 70, HorizontalAlignment.Left);
+            lv_Result.Columns.Add("流通股", 90, HorizontalAlignment.Left);
             lv_Result.Columns.Add("公积金", 70, HorizontalAlignment.Left);
             lv_Result.Columns.Add("未分配", 70, HorizontalAlignment.Left);
             lv_Result.Columns.Add("每股收益", 90, HorizontalAlignment.Left);
@@ -96,14 +96,19 @@ namespace GuDongClient
                     DataTable dt = new DataTable();
                     int period = (int)nud_Period.Value;
                     float per = 1.0f;
-                    string sql = "select * from Gudong where SPercent1<0 ";
+                    string sql = "";
 
-                    if (period == 1)
+                    if(period == 0)
                     {
-                        sql = "select * from Gudong where SPercent1<0 order by SPercent1 DESC";
+                        sql = "select * from Gudong where SDate1 >= '" + dtp_StockDate.Value.ToString("yyyy-MM-dd") + "'";
+                    }
+                    else if (period == 1)
+                    {
+                        sql = "select * from Gudong where SPercent1<0 and SDate1 >= '" + dtp_StockDate.Value.ToString("yyyy-MM-dd") + "' order by SPercent1 DESC";
                     }
                     else
                     {
+                        sql = "select * from Gudong where SPercent1<0 and SDate1 >= '" + dtp_StockDate.Value.ToString("yyyy-MM-dd") + "' ";
                         for (int i = 2; i <= period; i++)
                         {
                             sql = sql + string.Format("and SPercent{0:d}<0 ", i);
@@ -115,6 +120,8 @@ namespace GuDongClient
                         }
                         sql = sql + ")";
                     }
+
+                    //sql = sql + " and (SDate1 > " + "'" +dtp_StockDate.Value.ToString("yyyy-MM-dd") + "')";
 
                     using (SQLiteCommand command = new SQLiteCommand(conn))
                     {
@@ -260,6 +267,36 @@ namespace GuDongClient
                     MessageBox.Show(ex.Message.ToString());
                 }
             }
+        }
+
+        private void Bttn_LocateStock_Click(object sender, EventArgs e)
+        {
+            ListViewItem foundItem = lv_Result.FindItemWithText(tb_LocateStock.Text, true, lv_Result.TopItem.Index+1);
+
+            if(foundItem != null)
+            {
+                foundItem.Selected = true;
+                lv_Result.TopItem = foundItem;
+                lv_Result.TopItem.Selected = true;
+                lv_Result.Focus();
+            }
+            else
+            {
+                MessageBox.Show("找不到该股票");
+            }
+        }
+
+        private void tb_LocateStock_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                Bttn_LocateStock_Click(null,null);
+            }
+        }
+
+        private void dtp_StockDate_ValueChanged(object sender, EventArgs e)
+        {
+            UpdateStockTable();
         }
     }
 }
