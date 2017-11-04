@@ -10,10 +10,12 @@ from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.common.keys import Keys
 
 def ReadStockGuDongNumber(Stock_Number,name,totals,outstanding,reservedPerShare,esp,perundp):
+	ReturnValue = 1
 	try:
 		#weburl = "http://www.yidiancangwei.com/gudong/renshu_awdwad.html"
 		weburl = "http://www.yidiancangwei.com/gudong/renshu_" + Stock_Number + ".html"
-		
+		#print("%s"%weburl)
+
 		if UseSelenium == 1:
 			browser.get(weburl)
 			time.sleep(1)
@@ -24,7 +26,7 @@ def ReadStockGuDongNumber(Stock_Number,name,totals,outstanding,reservedPerShare,
 			webPage=urllib.request.urlopen(req)
 			HtmlData = webPage.read()
 			HtmlData = HtmlData.decode('UTF-8')
-			
+
 		soup = BeautifulSoup(HtmlData,'lxml')
 
 		#print(Stock_Number + ':')
@@ -48,7 +50,7 @@ def ReadStockGuDongNumber(Stock_Number,name,totals,outstanding,reservedPerShare,
 				GD_Number = tds[1].contents[0].strip()
 				GD_Change = tds[2].contents[0].strip()
 				if GD_Change == "-":
-					GD_Change="0"			
+					GD_Change="0"
 				SessionName=",SDate" + str(idx) + ",SNumber" + str(idx) + ",SPercent" + str(idx) + ") values("
 				sql="update Gudong set " + "SDate" + str(idx) + "='" + GD_Date
 				sql=sql+"', SNumber" + str(idx) + "=" + GD_Number
@@ -58,11 +60,15 @@ def ReadStockGuDongNumber(Stock_Number,name,totals,outstanding,reservedPerShare,
 				cu.execute(sql)
 			cx.commit()
 	except urllib.error.HTTPError as e:
-		print("Error Code: ", e.code);
+		print(Stock_Number + " " + name + "Error Code: ", e.code)
+		ReturnValue=0
 	except urllib.error.URLError as e:
-		print("Error: Cannot connect to server")
+		print(Stock_Number + " " + name +"Error: Cannot connect to server")
+		ReturnValue=0
 	except:
-		print("Error: Other error");
+		print(Stock_Number + " " + name + "Error: Other error")
+		ReturnValue=0
+	return ReturnValue
 	
 UseSelenium = 0
 
@@ -111,8 +117,19 @@ elif count>0:
 	print("开始读取所有股票股东信息信息,总数:%d"%len(BaseInfo))
 		
 	for i in range(0,count-1):
-		print("%d/%d %s %s %d%%"%((i+1),(count),(BaseInfo.index[i]),BaseInfo.iloc[i,0],((i+1)*100/count)))
-		ReadStockGuDongNumber(BaseInfo.index[i],BaseInfo.iloc[i,0],BaseInfo.iloc[i,5],BaseInfo.iloc[i,4],BaseInfo.iloc[i,10],BaseInfo.iloc[i,11],BaseInfo.iloc[i,16])
+		retry = 1
+		result = 0
+
+		while retry <= 3 :
+			print("%d/%d %s %s try%d %d%%"%((i+1),(count),(BaseInfo.index[i]),BaseInfo.iloc[i,0],retry,((i+1)*100/count)))
+			result = ReadStockGuDongNumber(BaseInfo.index[i],BaseInfo.iloc[i,0],BaseInfo.iloc[i,5],BaseInfo.iloc[i,4],BaseInfo.iloc[i,10],BaseInfo.iloc[i,11],BaseInfo.iloc[i,16])
+			if result == 1:
+				retry = 4
+			else:
+				retry += 1
+
+		
+		
 													
 	# BaseStock = 600000
 	# for i in range(0,999):
