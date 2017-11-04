@@ -36,7 +36,7 @@ def ReadStockGuDongNumber(Stock_Number,name,totals,outstanding,reservedPerShare,
 				GD_Date = tds[0].contents[0].strip()
 				GD_Number = tds[1].contents[0].strip()
 				GD_Change = tds[2].contents[0].strip()
-				if GD_Change == "-":
+				if GD_Change == "-" or GD_Change == "":
 					GD_Change="0"
 				SessionName=",SDate" + str(idx) + ",SNumber" + str(idx) + ",SPercent" + str(idx) + ",Name,totals,outstanding,reservedPerShare,esp,perundp) values("
 				sql="insert into Gudong(" + "StockNumber" + SessionName
@@ -49,7 +49,7 @@ def ReadStockGuDongNumber(Stock_Number,name,totals,outstanding,reservedPerShare,
 				GD_Date = tds[0].contents[0].strip()
 				GD_Number = tds[1].contents[0].strip()
 				GD_Change = tds[2].contents[0].strip()
-				if GD_Change == "-":
+				if GD_Change == "-" or GD_Change == "":
 					GD_Change="0"
 				SessionName=",SDate" + str(idx) + ",SNumber" + str(idx) + ",SPercent" + str(idx) + ") values("
 				sql="update Gudong set " + "SDate" + str(idx) + "='" + GD_Date
