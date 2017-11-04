@@ -65,8 +65,8 @@ def ReadStockGuDongNumber(Stock_Number,name,totals,outstanding,reservedPerShare,
 	except urllib.error.URLError as e:
 		print(Stock_Number + " " + name +"Error: Cannot connect to server")
 		ReturnValue=0
-	except:
-		print(Stock_Number + " " + name + "Error: Other error")
+	except Exception as e:
+		print(Stock_Number + " " + name + "Error: " + str(e))
 		ReturnValue=0
 	return ReturnValue
 	
