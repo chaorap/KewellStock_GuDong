@@ -77,7 +77,7 @@ if UseSelenium == 1:
 	os.environ["webdriver.chrome.driver"] = chromedriver
 	browser = webdriver.Chrome(chromedriver)
 
-DB_Name = "K:\KewellStock_GuDong\db\AStock_" +  datetime.datetime.now().strftime('%Y-%m-%d_%H_%M_%S') + ".sqlite"
+DB_Name = "db\AStock_" +  datetime.datetime.now().strftime('%Y-%m-%d_%H_%M_%S') + ".sqlite"
 cx = sqlite3.connect(DB_Name)
 cu=cx.cursor()
 cu.execute("create table Gudong (StockNumber integer primary key, Name nvarchar(10),\
