@@ -15,16 +15,24 @@ try:
 #        print(table[i].Text)
 
     df = pd.DataFrame(columns = ["Date", "Number", "Percent"]) #创建一个空的dataframe
-
+    cntt=0
     tables = soup.findAll(id='Table1')
     tab = tables[0]
-    cnt=0
     for tr in tab.findAll('tr'):
-        date = tr.findNext('td').getText()
-        number = tr.findNext('td').getText()
-        percent = tr.findNext('td').getText()
-        df.loc[cnt] = [date,number,percent]
-        cnt+=1
+        cnt=0
+        for td in tr.findAll('td'):
+            if cnt == 0:
+                date = td.getText()
+            elif cnt == 1:
+                number = td.getText()
+            elif cnt == 2:
+                percent = td.getText()
+                df.loc[cntt] = [date,number,percent]
+                cntt+=1
+                cnt=0
+            else:
+                pass
+            cnt+=1
     print(df)
 except Exception as e:
     print(e)
