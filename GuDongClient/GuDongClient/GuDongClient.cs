@@ -246,18 +246,28 @@ namespace GuDongClient
                             if (true)
                             {
                                 string code = dt.Rows[0][0].ToString().PadLeft(6, '0');
-                                string url = "http://image.sinajs.cn/newchart/daily/n/";
+                                string url_Day = "http://image.sinajs.cn/newchart/daily/n/";
+                                string url_Week = "http://image.sinajs.cn/newchart/weekly/n/";
+                                string url_Month = "http://image.sinajs.cn/newchart/monthly/n/";
                                 if (code.Substring(0, 1) == "6")
                                 {
-                                    url += "sh";
+                                    url_Day += "sh";
+                                    url_Week += "sh";
+                                    url_Month += "sh";
                                 }
                                 else
                                 {
-                                    url += "sz";
+                                    url_Day += "sz";
+                                    url_Week += "sz";
+                                    url_Month += "sz";
                                 }
-                                url += code + ".gif";
+                                url_Day += code + ".gif";
+                                url_Week += code + ".gif";
+                                url_Month += code + ".gif";
 
-                                Pic_Stock.ImageLocation = url;
+                                Pic_Stock_Day.ImageLocation = url_Day;
+                                Pic_Stock_Week.ImageLocation = url_Week;
+                                Pic_Stock_Month.ImageLocation = url_Month;
                             }
                         }
                     }

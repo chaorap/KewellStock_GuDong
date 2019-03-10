@@ -37,14 +37,18 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.lv_StockInfo = new System.Windows.Forms.ListView();
-            this.Pic_Stock = new System.Windows.Forms.PictureBox();
+            this.Pic_Stock_Day = new System.Windows.Forms.PictureBox();
             this.dtp_StockDate = new System.Windows.Forms.DateTimePicker();
             this.label2 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.tb_LocateStock = new System.Windows.Forms.TextBox();
             this.Bttn_LocateStock = new System.Windows.Forms.Button();
+            this.Pic_Stock_Week = new System.Windows.Forms.PictureBox();
+            this.Pic_Stock_Month = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.nud_Period)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.Pic_Stock)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Pic_Stock_Day)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Pic_Stock_Week)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Pic_Stock_Month)).BeginInit();
             this.SuspendLayout();
             // 
             // lv_Result
@@ -52,7 +56,7 @@
             this.lv_Result.FullRowSelect = true;
             this.lv_Result.Location = new System.Drawing.Point(14, 63);
             this.lv_Result.Name = "lv_Result";
-            this.lv_Result.Size = new System.Drawing.Size(624, 516);
+            this.lv_Result.Size = new System.Drawing.Size(624, 678);
             this.lv_Result.TabIndex = 4;
             this.lv_Result.UseCompatibleStateImageBehavior = false;
             this.lv_Result.View = System.Windows.Forms.View.Details;
@@ -131,21 +135,21 @@
             // 
             // lv_StockInfo
             // 
-            this.lv_StockInfo.Location = new System.Drawing.Point(644, 63);
+            this.lv_StockInfo.Location = new System.Drawing.Point(644, 9);
             this.lv_StockInfo.Name = "lv_StockInfo";
-            this.lv_StockInfo.Size = new System.Drawing.Size(400, 328);
+            this.lv_StockInfo.Size = new System.Drawing.Size(351, 732);
             this.lv_StockInfo.TabIndex = 9;
             this.lv_StockInfo.UseCompatibleStateImageBehavior = false;
             this.lv_StockInfo.View = System.Windows.Forms.View.Details;
             // 
-            // Pic_Stock
+            // Pic_Stock_Day
             // 
-            this.Pic_Stock.Location = new System.Drawing.Point(644, 398);
-            this.Pic_Stock.Name = "Pic_Stock";
-            this.Pic_Stock.Size = new System.Drawing.Size(400, 181);
-            this.Pic_Stock.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
-            this.Pic_Stock.TabIndex = 10;
-            this.Pic_Stock.TabStop = false;
+            this.Pic_Stock_Day.Location = new System.Drawing.Point(1001, 8);
+            this.Pic_Stock_Day.Name = "Pic_Stock_Day";
+            this.Pic_Stock_Day.Size = new System.Drawing.Size(400, 240);
+            this.Pic_Stock_Day.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+            this.Pic_Stock_Day.TabIndex = 10;
+            this.Pic_Stock_Day.TabStop = false;
             // 
             // dtp_StockDate
             // 
@@ -191,17 +195,37 @@
             this.Bttn_LocateStock.UseVisualStyleBackColor = true;
             this.Bttn_LocateStock.Click += new System.EventHandler(this.Bttn_LocateStock_Click);
             // 
+            // Pic_Stock_Week
+            // 
+            this.Pic_Stock_Week.Location = new System.Drawing.Point(1001, 254);
+            this.Pic_Stock_Week.Name = "Pic_Stock_Week";
+            this.Pic_Stock_Week.Size = new System.Drawing.Size(400, 240);
+            this.Pic_Stock_Week.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+            this.Pic_Stock_Week.TabIndex = 16;
+            this.Pic_Stock_Week.TabStop = false;
+            // 
+            // Pic_Stock_Month
+            // 
+            this.Pic_Stock_Month.Location = new System.Drawing.Point(1001, 497);
+            this.Pic_Stock_Month.Name = "Pic_Stock_Month";
+            this.Pic_Stock_Month.Size = new System.Drawing.Size(400, 240);
+            this.Pic_Stock_Month.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+            this.Pic_Stock_Month.TabIndex = 17;
+            this.Pic_Stock_Month.TabStop = false;
+            // 
             // GuDongClient
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1056, 593);
+            this.ClientSize = new System.Drawing.Size(1466, 749);
+            this.Controls.Add(this.Pic_Stock_Month);
+            this.Controls.Add(this.Pic_Stock_Week);
             this.Controls.Add(this.Bttn_LocateStock);
             this.Controls.Add(this.tb_LocateStock);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.dtp_StockDate);
-            this.Controls.Add(this.Pic_Stock);
+            this.Controls.Add(this.Pic_Stock_Day);
             this.Controls.Add(this.lv_StockInfo);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
@@ -214,7 +238,9 @@
             this.Name = "GuDongClient";
             this.Text = "股东人数";
             ((System.ComponentModel.ISupportInitialize)(this.nud_Period)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.Pic_Stock)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Pic_Stock_Day)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Pic_Stock_Week)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Pic_Stock_Month)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -231,12 +257,14 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.ListView lv_StockInfo;
-        private System.Windows.Forms.PictureBox Pic_Stock;
+        private System.Windows.Forms.PictureBox Pic_Stock_Day;
         private System.Windows.Forms.DateTimePicker dtp_StockDate;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox tb_LocateStock;
         private System.Windows.Forms.Button Bttn_LocateStock;
+        private System.Windows.Forms.PictureBox Pic_Stock_Week;
+        private System.Windows.Forms.PictureBox Pic_Stock_Month;
     }
 }
 

@@ -21,3 +21,5 @@ K:\KewellStock_GuDong\GuDongClient\GuDongClient\bin\Release\System.Data.SQLite.d
 K:\KewellStock_GuDong\GuDongClient\GuDongClient\obj\Release\GuDongClient.GuDongClient.resources
 K:\KewellStock_GuDong\GuDongClient\GuDongClient\obj\Release\GuDongClient.Properties.Resources.resources
 K:\KewellStock_GuDong\GuDongClient\GuDongClient\obj\Release\GuDongClient.csproj.GenerateResource.Cache
+K:\KewellStock_GuDong\GuDongClient\GuDongClient\obj\Release\GuDongClient.csproj.CoreCompileInputs.cache
+K:\KewellStock_GuDong\GuDongClient\GuDongClient\obj\Release\GuDongClient.csproj.CopyComplete
